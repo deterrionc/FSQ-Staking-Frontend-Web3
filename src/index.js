@@ -1,0 +1,41 @@
+// scroll bar
+import "simplebar/src/simplebar.css";
+import "react-toastify/dist/ReactToastify.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import React, { StrictMode } from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+// Providers
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { Provider as ReduxProvider } from "react-redux";
+import {
+  ChainId,
+  DAppProvider,
+  useEtherBalance,
+  useEthers,
+} from "@usedapp/core";
+
+import { store } from "redux/store";
+import { BrowserRouter } from "react-router-dom";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import { ToastContainer } from "react-toastify";
+
+const config = {
+  readOnlyChainId: ChainId.Mainnet,
+};
+
+ReactDOM.render(
+  <StrictMode>
+    <DAppProvider config={config}>
+      <ReduxProvider store={store}>
+        <BrowserRouter>
+          <App />
+          <ToastContainer />
+        </BrowserRouter>
+      </ReduxProvider>
+    </DAppProvider>
+  </StrictMode>,
+  document.getElementById("root")
+);
